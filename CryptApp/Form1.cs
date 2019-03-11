@@ -12,7 +12,6 @@ namespace CryptApp
 {
     public partial class Form1 : Form
     {
-
         public char[] EncryptIn;
         public char[] EncryptOut;
         public char[] decryptIn;
@@ -28,9 +27,9 @@ namespace CryptApp
                 {'x','e'},
                 {'e','d'},
                 {'d','c'},
-                {' ','@'},
+                {' ','/'},
                 {'i','k'},
-                {'m', 'o'},
+                {'m','o'},
                 {'h','n'},
                 {'c','t'},
                 {'r','f'},
@@ -107,6 +106,28 @@ namespace CryptApp
                 result_text += Char.ToString(decryptOut[i]);
             }
             result_2.Text = result_text;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            char[] input_text = ((textBox1.Text).ToLower()).ToCharArray();
+            int rep = 0;
+            for(int i = 0; i < input_text.Length - 1;i++)
+            {
+                if (input_text.Length == 1)
+                {
+                    rep = 1;
+                }
+                else if (input_text.Length > 1)
+                {
+                    if (input_text[i + 1].Equals(input_text[i]))
+                    {
+                        rep++;
+                    }
+                }
+            }
+            rep += 1;
+            label3.Text = rep.ToString();
         }
     }
 }
