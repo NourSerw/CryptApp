@@ -17,6 +17,7 @@ namespace CryptApp
         public char[] decryptIn;
         public char[] decryptOut;
         public string result_text;
+        public char placeholder;
         public char[,] cryptKey = new char[,]
             {
                 {'q','a'},
@@ -114,20 +115,19 @@ namespace CryptApp
             int rep = 0;
             for(int i = 0; i < input_text.Length - 1;i++)
             {
-                if (input_text.Length == 1)
-                {
-                    rep = 1;
-                }
-                else if (input_text.Length > 1)
+                if (input_text.Length > 1)
                 {
                     if (input_text[i + 1].Equals(input_text[i]))
                     {
+                        placeholder = input_text[i];
                         rep++;
                     }
                 }
+                
             }
             rep += 1;
-            label3.Text = rep.ToString();
+            result_text = number_Codes[rep - 1].ToString() + placeholder;
+            label3.Text = result_text;
         }
     }
 }
