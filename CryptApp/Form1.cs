@@ -45,8 +45,8 @@ namespace CryptApp
                 {'l','.'},
                 {'t','g'}
             };
-        public char[] number_Codes = new char[10] { ')', '!', '@', '#', '$', '%', '^', '&', '*', '(' };
-            
+        public char[] number_Codes = new char[10] { ')', '!', '@', '#', '$', '%', '^', '|', '*', '(' };
+
 
         public Form1()
         {
@@ -70,7 +70,7 @@ namespace CryptApp
                 }
             }
             Random random = new Random();
-            
+
             for (int i = 0; i < EncryptOut.Length; i++)
             {
                 int random_Number = random.Next(1, 135);
@@ -96,9 +96,9 @@ namespace CryptApp
             {
                 for (int z = 0; z < w; z++)
                 {
-                    if (cryptKey[z,1].Equals(decryptIn[i]))
+                    if (cryptKey[z, 1].Equals(decryptIn[i]))
                     {
-                        decryptOut[i] = cryptKey[z,0];
+                        decryptOut[i] = cryptKey[z, 0];
                     }
                 }
             }
@@ -111,22 +111,53 @@ namespace CryptApp
 
         private void button3_Click(object sender, EventArgs e)
         {
+            result_text = null;
             char[] input_text = ((textBox1.Text).ToLower()).ToCharArray();
+            char[] output_text = input_text;
+            bool firstElement = true;
             int rep = 0;
-            for(int i = 0; i < input_text.Length - 1;i++)
+            for (int i = 0; i < input_text.Length- 1; i++)
             {
-                if (input_text.Length > 1)
+                if (input_text.Length > 1 && i <= input_text.Length)
                 {
                     if (input_text[i + 1].Equals(input_text[i]))
                     {
-                        placeholder = input_text[i];
+                        if (firstElement == true)
+                        {
+                            output_text[i] = '?';
+                            placeholder = input_text[i];
+                            firstElement = false;
+                        }
+
                         rep++;
                     }
                 }
-                
             }
             rep += 1;
-            result_text = number_Codes[rep - 1].ToString() + placeholder;
+            if (rep == 1)
+            {
+                for (int i = 0; i < input_text.Length; i++)
+                {
+                    result_text += Char.ToString(input_text[i]);
+                }
+            }
+            else
+            {
+                for (int i = 0; i < output_text.Length; i++)
+                {
+                    if (output_text[i].Equals('?'))
+                    {
+                        int index = Array.LastIndexOf(output_text, output_text[rep - 1]);
+                        for (int p = 0; p < rep- 1; p++)
+                        {
+                            output_text[p + 1] = '-';
+                        }
+                        output_text[i] = number_Codes[rep - 1];
+                    }
+                    result_text += Char.ToString(output_text[i]);
+                }
+                //result_text = number_Codes[rep - 1] + Char.ToString(placeholder);
+            }
             label3.Text = result_text;
         }
     }
