@@ -128,7 +128,6 @@ namespace CryptApp
                             placeholder = input_text[i];
                             firstElement = false;
                         }
-
                         rep++;
                     }
                 }
@@ -147,8 +146,7 @@ namespace CryptApp
                 {
                     if (output_text[i].Equals('?'))
                     {
-                        int index = Array.LastIndexOf(output_text, output_text[rep - 1]);
-                        for (int p = 0; p < rep- 1; p++)
+                        for (int p = 1; p < rep - 1; p++)
                         {
                             output_text[p + 1] = '-';
                         }
@@ -156,7 +154,6 @@ namespace CryptApp
                     }
                     result_text += Char.ToString(output_text[i]);
                 }
-                //result_text = number_Codes[rep - 1] + Char.ToString(placeholder);
             }
             label3.Text = result_text;
         }
